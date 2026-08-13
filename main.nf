@@ -27,6 +27,7 @@ def probeMatrix() {
         ['p5_config_only_null', 'null',     'not present',          'NULL_BY_DESIGN'],
         ['p6_schema_only',      'not set',  "default 'SCHEMA'",     'SCHEMA'],
         ['p7_user_input',       "''",       'required, no default', 'ANYTHING'],
+        ['p8_profile_only',     'profile only', 'not present',      'REPORT_ONLY'],
     ]
 }
 
@@ -44,6 +45,8 @@ def receivedValue(Map allParams, String name) {
 }
 
 def verdictFor(String got, String expected) {
+    if( expected == 'REPORT_ONLY' )
+        return (got == 'ABSENT') ? 'absent (no profile selected?)' : "reported: ${got}"
     if( expected == 'ANYTHING' )
         return (got == 'ABSENT' || got == "''") ? 'not set' : 'ok'
     if( expected == 'NULL_BY_DESIGN' )
