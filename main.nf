@@ -69,13 +69,18 @@ workflow {
     log.info '=' * 100
     log.info ''
 
-    // The customer's symptom: a null in a publishDir path silently writes to
-    // the head node's local disk instead of the intended bucket.
+    // The symptom under investigation: a null in a publishDir path silently
+    // writes to the head node's local disk instead of the intended bucket.
+    // failOnError:false keeps that illustrative rather than fatal, so the
+    // table above always survives even when the path is nonsense.
+    log.info " publishDir would resolve to: ${params.p2_config_null}/probe-reports"
+    log.info ''
+
     WRITE_REPORT( MATRIX.collect { n, r -> "${n} = ${received(n)}" }.join('\n') )
 }
 
 process WRITE_REPORT {
-    publishDir "${params.p2_config_null}/probe-reports", mode: 'copy'
+    publishDir "${params.p2_config_null}/probe-reports", mode: 'copy', failOnError: false
 
     input:
     val report
