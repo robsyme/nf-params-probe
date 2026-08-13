@@ -9,7 +9,9 @@
             "title": "User supplied",
             "type": "object",
             "fa_icon": "fas fa-keyboard",
-            "required": ["p7_user_input"],
+            "required": [
+                "p7_user_input"
+            ],
             "description": "The one parameter a user is expected to fill in.",
             "properties": {
                 "p7_user_input": {
@@ -50,10 +52,34 @@
                     "fa_icon": "fas fa-file-code"
                 }
             }
+        },
+        "required_with_default": {
+            "title": "Required, with a schema default",
+            "type": "object",
+            "fa_icon": "fas fa-asterisk",
+            "required": [
+                "p9_required_default"
+            ],
+            "description": "The exact shape of the parameter that failed in FD-7826: required here, given a default here, and null in nextflow.config.",
+            "properties": {
+                "p9_required_default": {
+                    "type": "string",
+                    "description": "Try clearing this field and pressing Launch. Does the form stop you?",
+                    "default": "SCHEMA",
+                    "fa_icon": "fas fa-asterisk"
+                }
+            }
         }
     },
     "allOf": [
-        {"$ref": "#/$defs/user_supplied"},
-        {"$ref": "#/$defs/probe_parameters"}
+        {
+            "$ref": "#/$defs/user_supplied"
+        },
+        {
+            "$ref": "#/$defs/probe_parameters"
+        },
+        {
+            "$ref": "#/$defs/required_with_default"
+        }
     ]
 }

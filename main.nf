@@ -28,6 +28,7 @@ def probeMatrix() {
         ['p6_schema_only',      'not set',  "default 'SCHEMA'",     'SCHEMA'],
         ['p7_user_input',       "''",       'required, no default', 'ANYTHING'],
         ['p8_profile_only',     'profile only', 'not present',      'REPORT_ONLY'],
+        ['p9_required_default', 'null',     "REQUIRED, def 'SCHEMA'", 'SCHEMA'],
     ]
 }
 
