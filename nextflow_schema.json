@@ -1,0 +1,59 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://raw.githubusercontent.com/robsyme/nf-params-probe/main/nextflow_schema.json",
+    "title": "nf-params-probe pipeline parameters",
+    "description": "Probes how the Seqera Platform launch form resolves parameter defaults between nextflow.config and this schema (FD-7826).",
+    "type": "object",
+    "$defs": {
+        "user_supplied": {
+            "title": "User supplied",
+            "type": "object",
+            "fa_icon": "fas fa-keyboard",
+            "required": ["p7_user_input"],
+            "description": "The one parameter a user is expected to fill in.",
+            "properties": {
+                "p7_user_input": {
+                    "type": "string",
+                    "description": "Type anything here. Empty in nextflow.config, required here, no default.",
+                    "fa_icon": "fas fa-keyboard"
+                }
+            }
+        },
+        "probe_parameters": {
+            "title": "Probe parameters",
+            "type": "object",
+            "fa_icon": "fas fa-vial",
+            "description": "Each of these sits in a different relationship to nextflow.config. Leave them all untouched.",
+            "properties": {
+                "p2_config_null": {
+                    "type": "string",
+                    "description": "null in nextflow.config, default here. Mirrors params.outdir in FD-7826.",
+                    "default": "SCHEMA",
+                    "fa_icon": "fas fa-folder-open"
+                },
+                "p3_agree": {
+                    "type": "string",
+                    "description": "Same value in nextflow.config and here. Control.",
+                    "default": "CONFIG",
+                    "fa_icon": "fas fa-equals"
+                },
+                "p4_disagree": {
+                    "type": "string",
+                    "description": "'CONFIG' in nextflow.config, 'SCHEMA' here. Shows which side the form takes.",
+                    "default": "SCHEMA",
+                    "fa_icon": "fas fa-not-equal"
+                },
+                "p6_schema_only": {
+                    "type": "string",
+                    "description": "Not declared in nextflow.config at all. Only here.",
+                    "default": "SCHEMA",
+                    "fa_icon": "fas fa-file-code"
+                }
+            }
+        }
+    },
+    "allOf": [
+        {"$ref": "#/$defs/user_supplied"},
+        {"$ref": "#/$defs/probe_parameters"}
+    ]
+}

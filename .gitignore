@@ -1,0 +1,6 @@
+work/
+.nextflow*
+null/
+results/
+SCHEMA/
+CONFIG/
