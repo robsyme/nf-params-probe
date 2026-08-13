@@ -55,7 +55,7 @@ def verdictFor(String got, String expected) {
     if( got == expected )
         return 'ok'
     if( got == 'null' )
-        return 'NULLED  <-- params file carried an explicit null'
+        return 'NULL    <-- schema default not applied; config null stands'
     if( got == 'ABSENT' )
         return 'ABSENT  <-- schema default never applied'
     return "differs (expected ${expected})"
